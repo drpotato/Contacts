@@ -83,12 +83,20 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		long id = db.insert(ContactsEntry.TABLE_NAME,
 				null,
 				contact.getContent());
-		
-		contact.id = id;
-		
 		// If the id of the contact is greater that -1, the contact was
 		// successfully added to the database.
-		return id > -1;
+		if (id > -1){
+			
+			// Notify the Contacts Provider
+			notifyContactsProvider();
+			
+			// Set id for the contact id and return the result.
+			contact.id = id;
+			return true;
+		}
+		
+		// The 
+		return false;
 	}
 	
 	public synchronized boolean updateContact(final Contact contact) {
@@ -101,8 +109,16 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 				selection,
 				selectionArgs);
 		
-		
-		return value > 0;
+		// Notify the Contacts provider that something has changed and return
+		// let the calling method know that it was successful.
+		if (value > 0) {
+			notifyContactsProvider();
+			return true;
+		} else {
+			
+			// Otherwise updating the contact fail.
+			return false;
+		}
 	}
 	
 	public synchronized int deleteContact(final long id) {
@@ -115,8 +131,15 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 				selection,
 				selectionArgs
 				);
-		
+		// If deleting the contact was successful, notify the Contacts provider
+		if (result > 0) {
+			notifyContactsProvider();
+		}
 		return result;
+	}
+	
+	private void notifyContactsProvider() {
+		context.getContentResolver().notifyChange(ContactsProvider.URI_CONTACTS, null, false);
 	}
 
 }

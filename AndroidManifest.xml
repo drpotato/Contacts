@@ -30,6 +30,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ContactListActivity" />
         </activity>
+
+        <provider
+            android:name="com.cmor149.contacts.database.ContactsProvider"
+            android:authorities="com.cmor149.contacts.provider"
+            android:enabled="true"
+            android:exported="false" >
+        </provider>
     </application>
 
 </manifest>
