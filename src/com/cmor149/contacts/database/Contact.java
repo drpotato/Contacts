@@ -1,15 +1,17 @@
 package com.cmor149.contacts.database;
 
+import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 
 public class Contact {
-	private long id = -1;
+	long id = -1;
 	private String first_name;
 	private String last_name;
-	private String mobile_phone_number;
-	private String home_phone_number;
-	private String work_phone_number;
+	private String mobile_phone;
+	private String home_phone;
+	private String work_phone;
 	private String email_address;
 	private String home_address;
 	private String date_of_birth;
@@ -29,9 +31,9 @@ public class Contact {
 		this.id 					= cursor.getLong(0);
 		this.first_name 			= cursor.getString(1);
 		this.last_name 				= cursor.getString(2);
-		this.mobile_phone_number 	= cursor.getString(3);
-		this.home_phone_number 		= cursor.getString(4);
-		this.work_phone_number 		= cursor.getString(5);
+		this.mobile_phone 	= cursor.getString(3);
+		this.home_phone 		= cursor.getString(4);
+		this.work_phone 		= cursor.getString(5);
 		this.email_address 			= cursor.getString(6);
 		this.home_address 			= cursor.getString(7);
 		this.date_of_birth 			= cursor.getString(8);
@@ -44,5 +46,17 @@ public class Contact {
 	 */
 	public ContentValues getContent() {
 		final ContentValues contentValues = new ContentValues();
+		
+		contentValues.put(ContactsEntry.COLUMN_NAME_FIRST_NAME, first_name);
+		contentValues.put(ContactsEntry.COLUMN_NAME_LAST_NAME, last_name);
+		contentValues.put(ContactsEntry.COLUMN_NAME_MOBILE_PHONE, mobile_phone);
+		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_PHONE, home_phone);
+		contentValues.put(ContactsEntry.COLUMN_NAME_WORK_PHONE, work_phone);
+		contentValues.put(ContactsEntry.COLUMN_NAME_EMAIL_ADDRESS, email_address);
+		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_ADDRESS, home_address);
+		contentValues.put(ContactsEntry.COLUMN_NAME_DATE_OF_BIRTH, date_of_birth);
+		contentValues.put(ContactsEntry.COLUMN_NAME_PHOTO_URI, photo_uri);
+		
+		return contentValues;
 	}
 }

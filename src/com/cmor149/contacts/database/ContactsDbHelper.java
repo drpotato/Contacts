@@ -1,9 +1,11 @@
 package com.cmor149.contacts.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
 
 public class ContactsDbHelper extends SQLiteOpenHelper {
 	
@@ -29,7 +31,7 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
+		db.execSQL(ContactsContract.SQL_CREATE_TABLE);
 
 	}
 
@@ -37,6 +39,84 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public synchronized Contact getContact(final long id) {
+		
+		Contact contact = null;
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + "IS ?";
+		String[] selectionArgs = {String.valueOf(id)};
+		
+		Cursor cursor = db.query(ContactsEntry.TABLE_NAME,
+				ContactsEntry.COLUMNS,
+				selection,
+				selectionArgs,
+				null,
+				null,
+				null
+				);
+		
+		// Checks that the cursor is valid and within the bounds of the table,
+		// then moves the cursor to the first element.
+		if (!(cursor == null || /*cursor.isBeforeFirst() ||*/ cursor.isAfterLast()) && cursor.moveToFirst()) {
+			
+			// A new contact is created using the cursor
+			contact = new Contact(cursor);
+		}
+		
+		// The Cursor should always be closed it is no longer used.
+		cursor.close();
+		
+		return contact;
+	}
+	
+	public synchronized boolean insertContact(final Contact contact) {
+		
+		// Gets the database to use.
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		// Attempts to insert the contact into the database. Result is stored
+		// in 'value'.
+		long id = db.insert(ContactsEntry.TABLE_NAME,
+				null,
+				contact.getContent());
+		
+		contact.id = id;
+		
+		// If the id of the contact is greater that -1, the contact was
+		// successfully added to the database.
+		return id > -1;
+	}
+	
+	public synchronized boolean updateContact(final Contact contact) {
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		int value = 0;
+		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
+		String[] selectionArgs = {Long.toString(contact.id)};
+		value = db.update(ContactsEntry.TABLE_NAME, contact.getContent(),
+				selection,
+				selectionArgs);
+		
+		
+		return value > 0;
+	}
+	
+	public synchronized int deleteContact(final long id) {
+		
+		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
+		String[] selectionArgs = {Long.toString(id)};
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		int result = db.delete(ContactsEntry.TABLE_NAME,
+				selection,
+				selectionArgs
+				);
+		
+		return result;
 	}
 
 }

@@ -23,16 +23,17 @@ public final class ContactsContract {
 		public static final String COLUMN_NAME_CONTACT_ID = "_id";
 		public static final String COLUMN_NAME_FIRST_NAME = "first_name";
 		public static final String COLUMN_NAME_LAST_NAME = "last_name";
-		public static final String COLUMN_NAME_MOBILE_PHONE = "mobile_phone_number";
-		public static final String COLUMN_NAME_HOME_PHONE = "home_phone_number";
-		public static final String COLUMN_NAME_WORK_PHONE = "work_phone_number";
-		public static final String COLUMN_NAME_EMAIL_ADDRESS = "email_address_number";
-		public static final String COLUMN_NAME_HOME_ADDRESS = "home_address_number";
-		public static final String COLUMN_NAME_DATE_OF_BIRTH = "date_of_birth_number";
+		public static final String COLUMN_NAME_MOBILE_PHONE = "mobile_phone";
+		public static final String COLUMN_NAME_HOME_PHONE = "home_phone";
+		public static final String COLUMN_NAME_WORK_PHONE = "work_phone";
+		public static final String COLUMN_NAME_EMAIL_ADDRESS = "email_address";
+		public static final String COLUMN_NAME_HOME_ADDRESS = "home_address";
+		public static final String COLUMN_NAME_DATE_OF_BIRTH = "date_of_birth";
 		public static final String COLUMN_NAME_PHOTO_URI = "photo_uri";
 		
-		// The order of the fields in the database
-		public static final String[] FIELDS = {COLUMN_NAME_CONTACT_ID,
+		// Makes querying the database easy by providing all the fields in an
+		// array, ordered exactly the same way as it is in the database.
+		public static final String[] COLUMNS = {COLUMN_NAME_CONTACT_ID,
 			COLUMN_NAME_FIRST_NAME,
 			COLUMN_NAME_LAST_NAME,
 			COLUMN_NAME_MOBILE_PHONE,
@@ -65,6 +66,6 @@ public final class ContactsContract {
 			ContactsEntry.COLUMN_NAME_PHOTO_URI + TEXT_TYPE + COMMA + " )";
 	
 	// This string allows for easy deletion of the table.
-	private static final String SQL_DELETE_TABLE = 
+	public static final String SQL_DELETE_TABLE = 
 			"DROP TABLE IF EXISTS " + ContactsEntry.TABLE_NAME;
 }
