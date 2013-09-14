@@ -1,11 +1,19 @@
 package com.cmor149.contacts.database;
 
-import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
+
+/**
+ * @author Christopher Morgan
+ * 	  UPI: cmor149
+ * 	  ID:  1744263
+ * 
+ */
 public class Contact {
+	
+	// Package visibility is used for ease of access throughout the application.
 	long id = -1;
 	private String first_name;
 	private String last_name;
@@ -58,5 +66,35 @@ public class Contact {
 		contentValues.put(ContactsEntry.COLUMN_NAME_PHOTO_URI, photo_uri);
 		
 		return contentValues;
+	}
+	
+	
+	/**
+	 * Getters for all fields
+	 * @return
+	 */
+	public long id() {
+		return id;
+	}
+	public String getMobilePhone() {
+		return mobile_phone;
+	}
+	public String getHomePhone() {
+		return home_phone;
+	}
+	public String getWorkPhone() {
+		return work_phone;
+	}
+	public String getEmailAddress() {
+		return email_address;
+	}
+	public String getHomeAddress() {
+		return home_address;
+	}
+	public String getDateOfBirth() {
+		return date_of_birth;
+	}
+	public String getPhotoUri() {
+		return photo_uri;
 	}
 }

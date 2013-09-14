@@ -1,6 +1,7 @@
 package com.cmor149.contacts.database;
 
 import android.provider.BaseColumns;
+
 /**
  * @author Christopher Morgan
  * 	  UPI: cmor149
@@ -8,7 +9,6 @@ import android.provider.BaseColumns;
  * 	  
  *
  */
-
 public final class ContactsContract {
 	
 	public ContactsContract() {};
@@ -63,7 +63,7 @@ public final class ContactsContract {
 			ContactsEntry.COLUMN_NAME_EMAIL_ADDRESS + TEXT_TYPE + COMMA +
 			ContactsEntry.COLUMN_NAME_HOME_ADDRESS + TEXT_TYPE + COMMA +
 			ContactsEntry.COLUMN_NAME_DATE_OF_BIRTH + TEXT_TYPE + COMMA +
-			ContactsEntry.COLUMN_NAME_PHOTO_URI + TEXT_TYPE + COMMA + " )";
+			ContactsEntry.COLUMN_NAME_PHOTO_URI + TEXT_TYPE + " )";
 	
 	// This string allows for easy deletion of the table.
 	public static final String SQL_DELETE_TABLE = 

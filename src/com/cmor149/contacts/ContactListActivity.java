@@ -3,6 +3,10 @@ package com.cmor149.contacts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+
+import com.cmor149.contacts.detail.ContactDetailActivity;
+import com.cmor149.contacts.detail.ContactDetailFragment;
 
 /**
  * An activity representing a list of Contacts. This activity has different
@@ -22,7 +26,9 @@ import android.support.v4.app.FragmentActivity;
  */
 public class ContactListActivity extends FragmentActivity implements
 		ContactListFragment.Callbacks {
-
+	
+	private static final String TAG = "Contacts";
+	
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
@@ -31,10 +37,16 @@ public class ContactListActivity extends FragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+				
+		Log.d(TAG, "ContactListActivity: onCreate started");
 		super.onCreate(savedInstanceState);
+		
+		Log.d(TAG, "ContactListActivity: Setting content view");
 		setContentView(R.layout.activity_contact_list);
-
+		
 		if (findViewById(R.id.contact_detail_container) != null) {
+			
+			Log.d(TAG, "ContactListActivity: Large screen detected.");
 			// The detail container view will be present only in the
 			// large-screen layouts (res/values-large and
 			// res/values-sw600dp). If this view is present, then the
@@ -49,6 +61,8 @@ public class ContactListActivity extends FragmentActivity implements
 		}
 
 		// TODO: If exposing deep links into your app, handle intents here.
+		
+		Log.d(TAG, "ContactListActivity: onCreated finished");
 	}
 
 	/**
@@ -56,13 +70,13 @@ public class ContactListActivity extends FragmentActivity implements
 	 * that the item with the given ID was selected.
 	 */
 	@Override
-	public void onItemSelected(String id) {
+	public void onItemSelected(long id) {
 		if (mTwoPane) {
 			// In two-pane mode, show the detail view in this activity by
 			// adding or replacing the detail fragment using a
 			// fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putString(ContactDetailFragment.ARG_ITEM_ID, id);
+			arguments.putLong(ContactDetailFragment.ARG_ITEM_ID, id);
 			ContactDetailFragment fragment = new ContactDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()

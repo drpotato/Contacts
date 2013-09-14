@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.cmor149.contacts.ContactDetailActivity"
+            android:name="com.cmor149.contacts.detail.ContactDetailActivity"
             android:label="@string/title_contact_detail"
             android:parentActivityName=".ContactListActivity" >
             <meta-data

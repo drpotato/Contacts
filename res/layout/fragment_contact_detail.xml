@@ -1,9 +1,117 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contact_detail"
-    style="?android:attr/textAppearanceLarge"
+    android:id="@+id/contactDetailFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:textIsSelectable="true"
-    tools:context=".ContactDetailFragment" />
+    tools:context=".ContactDetailFragment" >
+    
+    <LinearLayout
+        android:id="@+id/contact_details_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        
+        <ImageView
+            android:id="@+id/contact_image"
+			android:contentDescription="@string/contact_image_description"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:maxHeight="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_contact_picture" 
+            />
+        
+        <TextView 
+            android:id="@+id/mobile_phone_title"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/mobile_phone_title"
+        	android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/mobile_phone_content"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/home_phone_title"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/home_phone_title"
+        	android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/home_phone_content"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/work_phone_title"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/work_phone_title"
+        	android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/work_phone_content"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/email_address_title"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/email_address_title"
+        	android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/email_address_content"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/home_address_title"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/home_address_title"
+        	android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/home_address_content"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        <TextView 
+            android:id="@+id/date_of_birth_title"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/date_of_birth_title"
+        	android:visibility="gone"
+            />
+        
+        <TextView 
+            android:id="@+id/date_of_birth_content"
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+        
+    </LinearLayout>
+    
+ </ScrollView>

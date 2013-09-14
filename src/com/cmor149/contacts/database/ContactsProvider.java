@@ -9,6 +9,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 
+/**
+ * @author Christopher Morgan
+ * 	  UPI: cmor149
+ * 	  ID:  1744263
+ * 	  
+ *
+ */
 public class ContactsProvider extends ContentProvider {
 	
 	public static final String AUTHORITY = "com.cmor149.contacts.provider";

@@ -1,4 +1,9 @@
-package com.cmor149.contacts;
+package com.cmor149.contacts.detail;
+
+import com.cmor149.contacts.ContactListActivity;
+import com.cmor149.contacts.R;
+import com.cmor149.contacts.R.id;
+import com.cmor149.contacts.R.layout;
 
 import android.content.Intent;
 import android.os.Bundle;
