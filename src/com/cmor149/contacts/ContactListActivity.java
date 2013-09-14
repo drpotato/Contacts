@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.cmor149.contacts.detail.ContactDetailActivity;
 import com.cmor149.contacts.detail.ContactDetailFragment;
@@ -89,5 +91,23 @@ public class ContactListActivity extends FragmentActivity implements
 			detailIntent.putExtra(ContactDetailFragment.ARG_ITEM_ID, id);
 			startActivity(detailIntent);
 		}
+	}
+	
+	/**
+	 * Creates the menu to add a new contact and sort the contacts in the list.
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.list_activity, menu);
+		return true;
+	}
+	
+	/**
+	 * createNewContact is called when the create new contact button is
+	 * selected in the action bar.
+	 */
+	public void createNewContact() {
+		// TODO: Implement method.
 	}
 }

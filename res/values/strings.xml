@@ -11,5 +11,6 @@
     <string name="home_address_title">Home Address</string>
     <string name="date_of_birth_title">Date of Birth</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_contact_title">Add New Contact</string>
 
 </resources>
