@@ -27,7 +27,7 @@
             android:id="@+id/mobile_phone_title"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content"
-        	android:text="@string/mobile_phone_title"
+        	android:text="@string/mobile_phone"
         	android:visibility="gone"
             />
         
@@ -42,7 +42,7 @@
             android:id="@+id/home_phone_title"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content"
-        	android:text="@string/home_phone_title"
+        	android:text="@string/home_phone"
         	android:visibility="gone"
             />
         
@@ -57,7 +57,7 @@
             android:id="@+id/work_phone_title"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content"
-        	android:text="@string/work_phone_title"
+        	android:text="@string/work_phone"
         	android:visibility="gone"
             />
         
@@ -72,7 +72,7 @@
             android:id="@+id/email_address_title"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content"
-        	android:text="@string/email_address_title"
+        	android:text="@string/email_address"
         	android:visibility="gone"
             />
         
@@ -87,7 +87,7 @@
             android:id="@+id/home_address_title"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content"
-        	android:text="@string/home_address_title"
+        	android:text="@string/home_address"
         	android:visibility="gone"
             />
         
@@ -101,7 +101,7 @@
             android:id="@+id/date_of_birth_title"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content"
-        	android:text="@string/date_of_birth_title"
+        	android:text="@string/date_of_birth"
         	android:visibility="gone"
             />
         

@@ -37,6 +37,11 @@
             android:enabled="true"
             android:exported="false" >
         </provider>
+
+        <activity
+            android:name="com.cmor149.contacts.EditContactActivity"
+            android:label="@string/title_activity_edit_contact" >
+        </activity>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.cmor149.contacts.detail.ContactDetailActivity;
 import com.cmor149.contacts.detail.ContactDetailFragment;
@@ -107,7 +108,7 @@ public class ContactListActivity extends FragmentActivity implements
 	 * createNewContact is called when the create new contact button is
 	 * selected in the action bar.
 	 */
-	public void createNewContact() {
+	public void createNewContact(MenuItem item) {
 		// TODO: Implement method.
 	}
 }

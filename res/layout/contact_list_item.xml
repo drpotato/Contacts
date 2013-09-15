@@ -10,17 +10,6 @@
 	android:paddingLeft="0dp"
 	android:paddingRight="0dp"
 	tools:context=".MainActivity" >
-	
-	<ImageView 
-		android:id="@+id/contact_list_image"
-		android:contentDescription="@string/contact_image_description"
-		android:layout_width="50dp"
-		android:layout_height="50dp"
-		android:src="@drawable/ic_contact_picture"
-		android:layout_gravity="center_vertical"
-		android:layout_alignParentRight="true"
-		android:scaleType="centerInside" 
-		/>
 
 	<TextView
 	    android:id="@+id/contact_list_name"
@@ -33,5 +22,16 @@
 	    android:textColor="#ff707070"
 	    android:text="Hello World!"
 	    android:textSize="23sp" />
+
+	<ImageView
+	    android:id="@+id/contact_list_image"
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:layout_alignParentRight="true"
+	    android:layout_centerVertical="true"
+	    android:layout_marginRight="14dp"
+	    android:contentDescription="@string/contact_image_description"
+	    android:scaleType="centerInside"
+	    android:src="@drawable/ic_contact_picture" />
 
 </RelativeLayout>
