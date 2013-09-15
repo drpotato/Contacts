@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditContactFragment" >
+    tools:context=".EditContactActivity" >
 
     <EditText
         android:id="@+id/first_name"
@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="5dp"
-        android:ems="13"
+        android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
         android:textStyle="italic"
