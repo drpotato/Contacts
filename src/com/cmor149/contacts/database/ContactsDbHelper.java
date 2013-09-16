@@ -43,7 +43,7 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 	
 	public synchronized Contact getContact(final long id) {
 		
-		Contact contact = null;
+		Contact contact = new Contact();
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		
@@ -99,6 +99,14 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param contact - Contact object that contains the contact information to
+	 * 					be updated in the database.
+	 * 
+	 * @return		  - True if updating the database was successful
+	 * 				  - False if updating the database was unsuccessful
+	 */
 	public synchronized boolean updateContact(final Contact contact) {
 		
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -112,12 +120,33 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		// Notify the Contacts provider that something has changed and return
 		// let the calling method know that it was successful.
 		if (value > 0) {
+			
 			notifyContactsProvider();
 			return true;
+			
 		} else {
 			
-			// Otherwise updating the contact fail.
+			// Otherwise, updating the contact failed so attempt to insert it.
+			
+			long id = db.insert(ContactsEntry.TABLE_NAME,
+					null,
+					contact.getContent());
+			// If the id of the contact is greater that -1, the contact was
+			// successfully added to the database.
+			if (id > -1){
+				
+				// Set id for the contact.
+				contact.id = id;
+				
+				// Notify the Contacts Provider
+				notifyContactsProvider();
+				
+				return true;
+			}
+			
+			//Updating the contact failed, notify the caller.
 			return false;
+			
 		}
 	}
 	

@@ -58,50 +58,50 @@ public class ContactDetailFragment extends Fragment {
 		TextView textView;
 		if (contact != null){
 			
-			if (contact.mobile_phone != "") {
+			if (contact.getMobilePhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_content);
-				textView.setText(contact.mobile_phone);
+				textView.setText(contact.getMobilePhone());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_title);
 				textView.setVisibility(View.VISIBLE);
 				
 			}
 			
-			if (contact.home_phone != "") {
+			if (contact.getHomePhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.home_phone_content);
-				textView.setText(contact.home_phone);
+				textView.setText(contact.getHomePhone());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.home_phone_title);
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			if (contact.work_phone != "") {
+			if (contact.getWorkPhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.work_phone_content);
-				textView.setText(contact.work_phone);
+				textView.setText(contact.getWorkPhone());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.work_phone_title);
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			if (contact.email_address != "") {
+			if (contact.getEmailAddress() != "") {
 				textView = (TextView)rootView.findViewById(R.id.email_address_content);
-				textView.setText(contact.email_address);
+				textView.setText(contact.getEmailAddress());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.email_address_title);
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			if (contact.home_address != "") {
+			if (contact.getHomeAddress() != "") {
 				textView = (TextView)rootView.findViewById(R.id.home_address_content);
-				textView.setText(contact.home_address);
+				textView.setText(contact.getHomeAddress());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.home_address_title);
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			if (contact.date_of_birth != "") {
+			if (contact.getDateOfBirth() != "") {
 				textView = (TextView)rootView.findViewById(R.id.date_of_birth_content);
-				textView.setText(contact.date_of_birth);
+				textView.setText(contact.getDateOfBirth());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.date_of_birth_title);
 				textView.setVisibility(View.VISIBLE);

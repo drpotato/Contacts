@@ -15,20 +15,42 @@ public class Contact {
 	
 	// Public visibility is used for ease of access throughout the application.
 	public long id = -1;
-	public String first_name;
-	public String last_name;
-	public String mobile_phone;
-	public String home_phone;
-	public String work_phone;
-	public String email_address;
-	public String home_address;
-	public String date_of_birth;
-	public String photo_uri;
+	private String firstName;
+	private String lastName;
+	private String mobilePhone;
+	private String homePhone;
+	private String workPhone;
+	private String emailAddress;
+	private String homeAddress;
+	private String dateOfBirth;
+	private String photoUri;
 	
 	/**
 	 * Creates a blank Contact object.
 	 */
 	public Contact() {}
+	
+	public Contact(String firstName,
+			String lastName,
+			String mobilePhone,
+			String homePhone,
+			String workPhone,
+			String emailAddress, 
+			String homeAddress,
+			String dateOfBirth,
+			String photoUri) {
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobilePhone = mobilePhone;
+		this.homePhone = homePhone;
+		this.workPhone = workPhone;
+		this.emailAddress = emailAddress;
+		this.homeAddress = homeAddress;
+		this.dateOfBirth = dateOfBirth;
+		this.photoUri = photoUri;
+		
+	}
 	
 	/**
 	 * Gathers information from the database using a cursor and converts it
@@ -37,15 +59,15 @@ public class Contact {
 	 */
 	public Contact(final Cursor cursor) {
 		this.id 			= cursor.getLong(0);
-		this.first_name 	= cursor.getString(1);
-		this.last_name 		= cursor.getString(2);
-		this.mobile_phone 	= cursor.getString(3);
-		this.home_phone 	= cursor.getString(4);
-		this.work_phone 	= cursor.getString(5);
-		this.email_address 	= cursor.getString(6);
-		this.home_address 	= cursor.getString(7);
-		this.date_of_birth 	= cursor.getString(8);
-		this.photo_uri 		= cursor.getString(9);
+		this.firstName 		= cursor.getString(1);
+		this.lastName 		= cursor.getString(2);
+		this.mobilePhone 	= cursor.getString(3);
+		this.homePhone 		= cursor.getString(4);
+		this.workPhone 		= cursor.getString(5);
+		this.emailAddress 	= cursor.getString(6);
+		this.homeAddress 	= cursor.getString(7);
+		this.dateOfBirth 	= cursor.getString(8);
+		this.photoUri 		= cursor.getString(9);
 	}
 	
 	/**
@@ -55,16 +77,72 @@ public class Contact {
 	public ContentValues getContent() {
 		final ContentValues contentValues = new ContentValues();
 		
-		contentValues.put(ContactsEntry.COLUMN_NAME_FIRST_NAME, first_name);
-		contentValues.put(ContactsEntry.COLUMN_NAME_LAST_NAME, last_name);
-		contentValues.put(ContactsEntry.COLUMN_NAME_MOBILE_PHONE, mobile_phone);
-		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_PHONE, home_phone);
-		contentValues.put(ContactsEntry.COLUMN_NAME_WORK_PHONE, work_phone);
-		contentValues.put(ContactsEntry.COLUMN_NAME_EMAIL_ADDRESS, email_address);
-		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_ADDRESS, home_address);
-		contentValues.put(ContactsEntry.COLUMN_NAME_DATE_OF_BIRTH, date_of_birth);
-		contentValues.put(ContactsEntry.COLUMN_NAME_PHOTO_URI, photo_uri);
+		contentValues.put(ContactsEntry.COLUMN_NAME_FIRST_NAME, getFirstName());
+		contentValues.put(ContactsEntry.COLUMN_NAME_LAST_NAME, getLastName());
+		contentValues.put(ContactsEntry.COLUMN_NAME_MOBILE_PHONE, getMobilePhone());
+		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_PHONE, getHomePhone());
+		contentValues.put(ContactsEntry.COLUMN_NAME_WORK_PHONE, getWorkPhone());
+		contentValues.put(ContactsEntry.COLUMN_NAME_EMAIL_ADDRESS, getEmailAddress());
+		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_ADDRESS, getHomeAddress());
+		contentValues.put(ContactsEntry.COLUMN_NAME_DATE_OF_BIRTH, getDateOfBirth());
+		contentValues.put(ContactsEntry.COLUMN_NAME_PHOTO_URI, photoUri);
 		
 		return contentValues;
+	}
+
+	/**
+	 * @return the first_name
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @return the last_name
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @return the mobile_phone
+	 */
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+
+	/**
+	 * @return the home_phone
+	 */
+	public String getHomePhone() {
+		return homePhone;
+	}
+
+	/**
+	 * @return the work_phone
+	 */
+	public String getWorkPhone() {
+		return workPhone;
+	}
+
+	/**
+	 * @return the email_address
+	 */
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	/**
+	 * @return the home_address
+	 */
+	public String getHomeAddress() {
+		return homeAddress;
+	}
+
+	/**
+	 * @return the date_of_birth
+	 */
+	public String getDateOfBirth() {
+		return dateOfBirth;
 	}
 }

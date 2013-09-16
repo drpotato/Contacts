@@ -30,7 +30,9 @@ import com.cmor149.contacts.detail.ContactDetailFragment;
 public class ContactListActivity extends FragmentActivity implements
 		ContactListFragment.Callbacks {
 	
-	private static final String TAG = "Contacts";
+	public static final String TAG = "Contacts";
+	public static final String CONTACT_ID_MESSAGE = "contact_id";
+	public static final long NEW_CONTACT_ID = -1;
 	
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -110,5 +112,9 @@ public class ContactListActivity extends FragmentActivity implements
 	 */
 	public void createNewContact(MenuItem item) {
 		// TODO: Implement method.
+		
+		Intent intent = new Intent(this, EditContactActivity.class);
+		intent.putExtra(CONTACT_ID_MESSAGE, NEW_CONTACT_ID);
+		startActivity(intent);
 	}
 }

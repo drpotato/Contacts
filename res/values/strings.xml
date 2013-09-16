@@ -16,5 +16,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="discard_title">Discard</string>
 
 </resources>
