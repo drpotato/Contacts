@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.cmor149.contacts.database.ContactsDbHelper;
 import com.cmor149.contacts.detail.ContactDetailActivity;
 import com.cmor149.contacts.detail.ContactDetailFragment;
 
@@ -117,4 +118,12 @@ public class ContactListActivity extends FragmentActivity implements
 		intent.putExtra(CONTACT_ID_MESSAGE, NEW_CONTACT_ID);
 		startActivity(intent);
 	}
+	
+//	@Override
+//	public void onDestroy() {
+//		ContactsDbHelper dbHelper = ContactsDbHelper.getInstance(this);
+//		dbHelper.flushDatabase();
+//		
+//		super.onDestroy();
+//	}
 }

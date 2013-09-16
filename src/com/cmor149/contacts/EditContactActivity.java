@@ -76,10 +76,11 @@ public class EditContactActivity extends Activity {
 		
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			saveContact();
-		default:
-			return super.onOptionsItemSelected(item);
+			onBackPressed();
+			
 		}
+		
+		return super.onOptionsItemSelected(item);
 		
 	}
 	
@@ -92,6 +93,7 @@ public class EditContactActivity extends Activity {
 	}
 	
 	private void saveContact() {
+		
 		contact = new Contact(
 				((EditText) findViewById(R.id.first_name)).getText().toString(),
 				((EditText) findViewById(R.id.last_name)).getText().toString(),
@@ -104,7 +106,10 @@ public class EditContactActivity extends Activity {
 				"" // TODO: Photo URI to be added!
 				);
 		
-		dbHelper.updateContact(contact);
+		if (! contact.isBlank()) {
+			dbHelper.updateContact(contact);
+		}
+		
 	}
 
 }

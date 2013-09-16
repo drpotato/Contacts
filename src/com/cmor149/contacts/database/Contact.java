@@ -89,6 +89,16 @@ public class Contact {
 		
 		return contentValues;
 	}
+	
+	public boolean isBlank() {
+		if (firstName == "" && lastName == "" && mobilePhone == "" &&
+				homePhone == "" && workPhone == "" && emailAddress == "" &&
+				homeAddress == "" && dateOfBirth == "" && photoUri == "") {
+			return true;
+		}
+		
+		return false;
+	}
 
 	/**
 	 * @return the first_name

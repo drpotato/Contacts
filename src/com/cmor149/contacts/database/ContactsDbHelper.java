@@ -47,7 +47,7 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		
 		SQLiteDatabase db = this.getReadableDatabase();
 		
-		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + "IS ?";
+		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
 		String[] selectionArgs = {String.valueOf(id)};
 		
 		Cursor cursor = db.query(ContactsEntry.TABLE_NAME,
@@ -170,5 +170,14 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 	private void notifyContactsProvider() {
 		context.getContentResolver().notifyChange(ContactsProvider.URI_CONTACTS, null, false);
 	}
-
+	
+	public synchronized boolean flushDatabase() {
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		int result = db.delete(ContactsEntry.TABLE_NAME, "1", null);
+		
+		return result > 0;
+		
+	}
 }

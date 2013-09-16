@@ -78,7 +78,7 @@ public class ContactsProvider extends ContentProvider {
 			
 			cursor = db.query(ContactsEntry.TABLE_NAME,
 					ContactsEntry.COLUMNS,
-					ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?",
+					ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ? ",
 					new String[] {String.valueOf(id)},
 					null,
 					null,
