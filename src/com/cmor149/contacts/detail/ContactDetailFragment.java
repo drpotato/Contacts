@@ -2,6 +2,7 @@ package com.cmor149.contacts.detail;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import com.cmor149.contacts.database.ContactsDbHelper;
  * tablets) or a {@link ContactDetailActivity} on handsets.
  */
 public class ContactDetailFragment extends Fragment {
+	
+	private static final String LOG = "Contacts"; 
+	
 	/**
 	 * The fragment argument representing the item ID that this fragment
 	 * represents.
@@ -58,22 +62,27 @@ public class ContactDetailFragment extends Fragment {
 		TextView textView;
 		if (contact != null){
 			
+			Log.d(LOG, "ContactDetailFragment: Mobile Phone" + contact.getMobilePhone() );
+			
 			if (contact.getMobilePhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_content);
 				textView.setText(contact.getMobilePhone());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_title);
-				textView.setVisibility(View.VISIBLE);
-				
+				textView.setVisibility(View.VISIBLE);	
 			}
+			
+			Log.d(LOG, "ContactDetailFragment: Home Phone" + contact.getHomePhone() );
 			
 			if (contact.getHomePhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.home_phone_content);
 				textView.setText(contact.getHomePhone());
 				textView.setVisibility(View.VISIBLE);
 				textView = (TextView)rootView.findViewById(R.id.home_phone_title);
-				textView.setVisibility(View.VISIBLE);
+				textView.setVisibility(View.VISIBLE);				
 			}
+			
+			Log.d(LOG, "ContactDetailFragment: Work Phone" + contact.getWorkPhone() );
 			
 			if (contact.getWorkPhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.work_phone_content);
@@ -83,6 +92,8 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);
 			}
 			
+			Log.d(LOG, "ContactDetailFragment: Email Address" + contact.getEmailAddress() );
+			
 			if (contact.getEmailAddress() != "") {
 				textView = (TextView)rootView.findViewById(R.id.email_address_content);
 				textView.setText(contact.getEmailAddress());
@@ -91,6 +102,8 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);
 			}
 			
+			Log.d(LOG, "ContactDetailFragment: Home Address" + contact.getHomeAddress() );
+			
 			if (contact.getHomeAddress() != "") {
 				textView = (TextView)rootView.findViewById(R.id.home_address_content);
 				textView.setText(contact.getHomeAddress());
@@ -98,6 +111,8 @@ public class ContactDetailFragment extends Fragment {
 				textView = (TextView)rootView.findViewById(R.id.home_address_title);
 				textView.setVisibility(View.VISIBLE);
 			}
+			
+			Log.d(LOG, "ContactDetailFragment: Date of Birth" + contact.getDateOfBirth() );
 			
 			if (contact.getDateOfBirth() != "") {
 				textView = (TextView)rootView.findViewById(R.id.date_of_birth_content);
