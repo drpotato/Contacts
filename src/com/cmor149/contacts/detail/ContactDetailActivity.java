@@ -133,7 +133,7 @@ public class ContactDetailActivity extends FragmentActivity {
 		
 		// Note the Negative button is labeled Yes and the positive the opposite.
 		// This is so the abort option is closest to the users thumb when the
-		// click on delete. 
+		// user selects delete.
 		builder.setMessage("Are you sure?").setNegativeButton("Yes", dialogClickListener)
 			.setPositiveButton("No", dialogClickListener).show();
 	}
