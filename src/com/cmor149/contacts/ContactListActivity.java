@@ -77,6 +77,11 @@ public class ContactListActivity extends FragmentActivity implements
 	 */
 	@Override
 	public void onItemSelected(long id) {
+		
+		Log.d(TAG, "ContactListActivity: onItemSelected started");
+		
+		Log.d(TAG, "ContactListActivity: id = " + Long.toString(id));
+		
 		if (mTwoPane) {
 			// In two-pane mode, show the detail view in this activity by
 			// adding or replacing the detail fragment using a
@@ -89,6 +94,8 @@ public class ContactListActivity extends FragmentActivity implements
 					.replace(R.id.contact_detail_container, fragment).commit();
 
 		} else {
+			
+			Log.d(TAG, "ContactListActivity: In single-pane mode, starting ContactDetailActivity");
 			// In single-pane mode, simply start the detail activity
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this, ContactDetailActivity.class);
@@ -103,7 +110,7 @@ public class ContactListActivity extends FragmentActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.list_activity, menu);
+		inflater.inflate(R.menu.contact_list_activity, menu);
 		return true;
 	}
 	

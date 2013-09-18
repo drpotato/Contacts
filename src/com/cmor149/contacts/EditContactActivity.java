@@ -17,6 +17,7 @@ public class EditContactActivity extends Activity {
 	private static final String LOG = "Contacts";
 	
 	private ContactsDbHelper dbHelper;
+	private long id = -1;
 	private Contact contact;
 
 	@Override
@@ -46,7 +47,7 @@ public class EditContactActivity extends Activity {
 			
 			Intent intent = getIntent();
 			
-			long id = intent.getLongExtra(ContactListActivity.CONTACT_ID_MESSAGE, ContactListActivity.NEW_CONTACT_ID);
+			id = intent.getLongExtra(ContactListActivity.CONTACT_ID_MESSAGE, ContactListActivity.NEW_CONTACT_ID);
 			
 			dbHelper = ContactsDbHelper.getInstance(this);
 			contact = dbHelper.getContact(id);
@@ -67,7 +68,7 @@ public class EditContactActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_contact, menu);
+		getMenuInflater().inflate(R.menu.edit_contact_activity, menu);
 		return true;
 	}
 	
@@ -77,6 +78,8 @@ public class EditContactActivity extends Activity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			onBackPressed();
+		case R.id.discard:
+			finish();
 			
 		}
 		
@@ -95,6 +98,7 @@ public class EditContactActivity extends Activity {
 	private void saveContact() {
 		
 		contact = new Contact(
+				id,
 				((EditText) findViewById(R.id.first_name)).getText().toString(),
 				((EditText) findViewById(R.id.last_name)).getText().toString(),
 				((EditText) findViewById(R.id.mobile_phone)).getText().toString(),

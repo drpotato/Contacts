@@ -20,7 +20,7 @@ import com.cmor149.contacts.database.ContactsDbHelper;
  */
 public class ContactDetailFragment extends Fragment {
 	
-	private static final String LOG = "Contacts"; 
+	private static final String TAG = "Contacts"; 
 	
 	/**
 	 * The fragment argument representing the item ID that this fragment
@@ -42,14 +42,24 @@ public class ContactDetailFragment extends Fragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
+		Log.d(TAG, "ContactDetailFragment: onCreate started");
+		
 		super.onCreate(savedInstanceState);
 
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
+			
+			Log.d(TAG, "ContactDetailFragment: Getting contact where id = " + getArguments().getLong(ARG_ITEM_ID));
+			
 			// Load the dummy content specified by the fragment
 			// arguments. In a real-world scenario, use a Loader
 			// to load content from a content provider.
 			contact = ContactsDbHelper.getInstance(getActivity()).getContact(getArguments().getLong(ARG_ITEM_ID));
+		} else {
+			Log.d(TAG, "ContactDetailFragment: WARNING!!! Missing argument - " + ARG_ITEM_ID);
 		}
+		
+		Log.d(TAG, "ContactDetailFragment: onCreate finished");
 	}
 
 	@Override
@@ -62,7 +72,7 @@ public class ContactDetailFragment extends Fragment {
 		TextView textView;
 		if (contact != null){
 			
-			Log.d(LOG, "ContactDetailFragment: Mobile Phone" + contact.getMobilePhone() );
+			Log.d(TAG, "ContactDetailFragment: Mobile Phone" + contact.getMobilePhone() );
 			
 			if (contact.getMobilePhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_content);
@@ -72,7 +82,7 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);	
 			}
 			
-			Log.d(LOG, "ContactDetailFragment: Home Phone" + contact.getHomePhone() );
+			Log.d(TAG, "ContactDetailFragment: Home Phone" + contact.getHomePhone() );
 			
 			if (contact.getHomePhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.home_phone_content);
@@ -82,7 +92,7 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);				
 			}
 			
-			Log.d(LOG, "ContactDetailFragment: Work Phone" + contact.getWorkPhone() );
+			Log.d(TAG, "ContactDetailFragment: Work Phone" + contact.getWorkPhone() );
 			
 			if (contact.getWorkPhone() != "") {
 				textView = (TextView)rootView.findViewById(R.id.work_phone_content);
@@ -92,7 +102,7 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			Log.d(LOG, "ContactDetailFragment: Email Address" + contact.getEmailAddress() );
+			Log.d(TAG, "ContactDetailFragment: Email Address" + contact.getEmailAddress() );
 			
 			if (contact.getEmailAddress() != "") {
 				textView = (TextView)rootView.findViewById(R.id.email_address_content);
@@ -102,7 +112,7 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			Log.d(LOG, "ContactDetailFragment: Home Address" + contact.getHomeAddress() );
+			Log.d(TAG, "ContactDetailFragment: Home Address" + contact.getHomeAddress() );
 			
 			if (contact.getHomeAddress() != "") {
 				textView = (TextView)rootView.findViewById(R.id.home_address_content);
@@ -112,7 +122,7 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);
 			}
 			
-			Log.d(LOG, "ContactDetailFragment: Date of Birth" + contact.getDateOfBirth() );
+			Log.d(TAG, "ContactDetailFragment: Date of Birth" + contact.getDateOfBirth() );
 			
 			if (contact.getDateOfBirth() != "") {
 				textView = (TextView)rootView.findViewById(R.id.date_of_birth_content);

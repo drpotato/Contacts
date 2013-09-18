@@ -15,7 +15,6 @@
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
-        android:textStyle="italic"
         android:typeface="monospace">
         
         <requestFocus />
@@ -31,7 +30,6 @@
         android:layout_below="@+id/first_name"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
-        android:textStyle="italic"
         android:typeface="monospace" />
 
     <ImageView

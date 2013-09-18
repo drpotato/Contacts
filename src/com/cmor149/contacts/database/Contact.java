@@ -2,6 +2,7 @@ package com.cmor149.contacts.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
 
@@ -12,6 +13,8 @@ import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
  * 
  */
 public class Contact {
+	
+	private static final String TAG = "Contacts";
 	
 	// Public visibility is used for ease of access throughout the application.
 	public long id = -1;
@@ -30,7 +33,8 @@ public class Contact {
 	 */
 	public Contact() {}
 	
-	public Contact(String firstName,
+	public Contact(long id,
+			String firstName,
 			String lastName,
 			String mobilePhone,
 			String homePhone,
@@ -40,6 +44,7 @@ public class Contact {
 			String dateOfBirth,
 			String photoUri) {
 		
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobilePhone = mobilePhone;
@@ -58,16 +63,16 @@ public class Contact {
 	 * @param cursor - a cursor connected to the Contacts database.
 	 */
 	public Contact(final Cursor cursor) {
-		this.id 			= cursor.getLong(0);
-		this.firstName 		= cursor.getString(1);
-		this.lastName 		= cursor.getString(2);
-		this.mobilePhone 	= cursor.getString(3);
-		this.homePhone 		= cursor.getString(4);
-		this.workPhone 		= cursor.getString(5);
-		this.emailAddress 	= cursor.getString(6);
-		this.homeAddress 	= cursor.getString(7);
-		this.dateOfBirth 	= cursor.getString(8);
-		this.photoUri 		= cursor.getString(9);
+		id 				= cursor.getLong(0);
+		firstName 		= cursor.getString(1);
+		lastName 		= cursor.getString(2);
+		mobilePhone 	= cursor.getString(3);
+		homePhone 		= cursor.getString(4);
+		workPhone 		= cursor.getString(5);
+		emailAddress 	= cursor.getString(6);
+		homeAddress 	= cursor.getString(7);
+		dateOfBirth 	= cursor.getString(8);
+		photoUri 		= cursor.getString(9);
 	}
 	
 	/**
@@ -91,9 +96,10 @@ public class Contact {
 	}
 	
 	public boolean isBlank() {
-		if (firstName == "" && lastName == "" && mobilePhone == "" &&
-				homePhone == "" && workPhone == "" && emailAddress == "" &&
-				homeAddress == "" && dateOfBirth == "" && photoUri == "") {
+		
+		if (firstName.isEmpty() && lastName.isEmpty() && mobilePhone.isEmpty() &&
+				homePhone.isEmpty() && workPhone.isEmpty() && emailAddress.isEmpty() &&
+				homeAddress.isEmpty() && dateOfBirth.isEmpty() && photoUri.isEmpty()) {
 			return true;
 		}
 		
@@ -154,5 +160,9 @@ public class Contact {
 	 */
 	public String getDateOfBirth() {
 		return dateOfBirth;
+	}
+	
+	public String getPhotoUri() {
+		return photoUri;
 	}
 }

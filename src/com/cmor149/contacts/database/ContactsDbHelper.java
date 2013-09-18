@@ -4,10 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
 
 public class ContactsDbHelper extends SQLiteOpenHelper {
+	
+	private static String LOG = "Contacts";
 	
 	private static ContactsDbHelper contactsDbHelper;
 	
@@ -43,12 +46,16 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 	
 	public synchronized Contact getContact(final long id) {
 		
-		Contact contact = new Contact();
+		Log.d(LOG, "ContactsDbHelper: getContact starting");
+		Log.d(LOG, "ContactsDbHelper: id = " + Long.toString(id));
 		
+		Contact contact = new Contact();
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
 		String[] selectionArgs = {String.valueOf(id)};
+		
+		Log.d(LOG, "ContactsDbHelper: Querying database.");
 		
 		Cursor cursor = db.query(ContactsEntry.TABLE_NAME,
 				ContactsEntry.COLUMNS,
@@ -59,12 +66,36 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 				null
 				);
 		
+		if (cursor == null) {
+			Log.d(LOG, "ContactsDbHelper: WARNING!!! null cursor");
+		}
+		
+		if (cursor.isAfterLast()) {
+			Log.d(LOG, "ContactsDbHelper: WARNING!!! cursor after last");
+		}
+		
+		
+		
 		// Checks that the cursor is valid and within the bounds of the table,
 		// then moves the cursor to the first element.
-		if (!(cursor == null || /*cursor.isBeforeFirst() ||*/ cursor.isAfterLast()) && cursor.moveToFirst()) {
+		if (!(cursor == null /*|| cursor.isBeforeFirst() || cursor.isAfterLast())*/) && cursor.moveToFirst()) {
 			
 			// A new contact is created using the cursor
 			contact = new Contact(cursor);
+			
+			String log = "ID: " + contact.id + 
+					"\nFirst Name: " + contact.getFirstName() +
+					"\nLast Name: " + contact.getLastName() + 
+					"\nMobile Phone: " + contact.getMobilePhone() +
+					"\nHome Phone: " + contact.getHomePhone() +
+					"\nWork Phone: " + contact.getWorkPhone() +
+					"\nEmail Address: " + contact.getEmailAddress() + 
+					"\nHome Address: " + contact.getHomeAddress() + 
+					"\nDateOfBirth: " + contact.getDateOfBirth() + 
+					"\nPhotoURI: " + contact.getPhotoUri();
+						
+			
+			Log.d(LOG, "ContactsDbHelper:\n" + log);
 		}
 		
 		// The Cursor should always be closed it is no longer used.
@@ -108,6 +139,19 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 	 * 				  - False if updating the database was unsuccessful
 	 */
 	public synchronized boolean updateContact(final Contact contact) {
+		
+		String log = "ID: |" + contact.id + "|" + 
+				"\nFirst Name: |" + contact.getFirstName() + "|" + 
+				"\nLast Name: |" + contact.getLastName() +  "|" + 
+				"\nMobile Phone: |" + contact.getMobilePhone() + "|" + 
+				"\nHome Phone: |" + contact.getHomePhone() + "|" + 
+				"\nWork Phone: |" + contact.getWorkPhone() + "|" + 
+				"\nEmail Address: |" + contact.getEmailAddress() +  "|" + 
+				"\nHome Address: |" + contact.getHomeAddress() +  "|" + 
+				"\nDateOfBirth: |" + contact.getDateOfBirth() +  "|" + 
+				"\nPhotoURI: |" + contact.getPhotoUri() + "|"; 
+		
+		Log.d(LOG, "ContactsDbHelper:\n" + log);
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		int value = 0;
