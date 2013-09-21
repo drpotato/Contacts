@@ -4,7 +4,7 @@
     <item
         android:id="@+id/add_new_contact"
         android:title="@string/add_contact_title"
-        android:icon="@drawable/social_add_person"
+        android:icon="@drawable/social_add_person_dark"
         android:orderInCategory="1"
         android:showAsAction="ifRoom"
         android:onClick="createNewContact"

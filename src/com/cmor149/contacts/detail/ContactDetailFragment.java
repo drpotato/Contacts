@@ -59,6 +59,8 @@ public class ContactDetailFragment extends Fragment {
 			Log.d(TAG, "ContactDetailFragment: WARNING!!! Missing argument - " + ARG_ITEM_ID);
 		}
 		
+		getActivity().setTitle(contact.getFirstName() + " " + contact.getLastName());
+		
 		Log.d(TAG, "ContactDetailFragment: onCreate finished");
 	}
 

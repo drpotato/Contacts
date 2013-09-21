@@ -5,6 +5,6 @@
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
         android:title="@string/discard_title"
-        android:icon="@drawable/content_discard"/>
+        android:icon="@drawable/content_discard_dark"/>
 
 </menu>
