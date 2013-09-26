@@ -44,19 +44,28 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 
 	}
 	
+	/**
+	 * Queries the database for a contact. If found, returns the Contact
+	 * object corresponding to that in the database. Otherwise, creates a new contact.
+	 * @param id
+	 * @return
+	 */
 	public synchronized Contact getContact(final long id) {
 		
 		Log.d(LOG, "ContactsDbHelper: getContact starting");
 		Log.d(LOG, "ContactsDbHelper: id = " + Long.toString(id));
 		
+		// Set up the contact and database.
 		Contact contact = new Contact();
 		SQLiteDatabase db = this.getReadableDatabase();
 		
+		// Set up the query statements.
 		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
 		String[] selectionArgs = {String.valueOf(id)};
 		
 		Log.d(LOG, "ContactsDbHelper: Querying database.");
 		
+		// Create a cursor that queries the database for the specific contact.
 		Cursor cursor = db.query(ContactsEntry.TABLE_NAME,
 				ContactsEntry.COLUMNS,
 				selection,
@@ -69,7 +78,6 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		if (cursor == null) {
 			Log.d(LOG, "ContactsDbHelper: WARNING!!! null cursor");
 		}
-		
 		if (cursor.isAfterLast()) {
 			Log.d(LOG, "ContactsDbHelper: WARNING!!! cursor after last");
 		}
@@ -101,6 +109,7 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		// The Cursor should always be closed it is no longer used.
 		cursor.close();
 		
+		// Return the Contact created
 		return contact;
 	}
 	
@@ -153,28 +162,30 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		
 		Log.d(LOG, "ContactsDbHelper:\n" + log);
 		
+		// Set up the database
 		SQLiteDatabase db = this.getWritableDatabase();
-		int value = 0;
 		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
 		String[] selectionArgs = {Long.toString(contact.id)};
-		value = db.update(ContactsEntry.TABLE_NAME, contact.getContent(),
+		
+		// Try to update the contact in the database. If it was successful,
+		// value is set to 1. Otherwise, value is set to 0. 
+		int value = db.update(ContactsEntry.TABLE_NAME, contact.getContent(),
 				selection,
 				selectionArgs);
 		
-		// Notify the Contacts provider that something has changed and return
-		// let the calling method know that it was successful.
+		// If updating the database entry was successful notify the contacts
+		// provider that the database has changed. 
 		if (value > 0) {
-			
 			notifyContactsProvider();
 			return true;
 			
 		} else {
 			
 			// Otherwise, updating the contact failed so attempt to insert it.
-			
 			long id = db.insert(ContactsEntry.TABLE_NAME,
 					null,
 					contact.getContent());
+			
 			// If the id of the contact is greater that -1, the contact was
 			// successfully added to the database.
 			if (id > -1){
@@ -194,12 +205,20 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		}
 	}
 	
-	public synchronized int deleteContact(final long id) {
+	/**
+	 * Deletes a contact entry from the database.
+	 * @param id - The Id of the contact to delete.
+	 * @return 
+	 */
+	public synchronized boolean deleteContact(final long id) {
 		
+		// Set up the database and queries.
+		SQLiteDatabase db = this.getWritableDatabase();
 		String selection = ContactsEntry.COLUMN_NAME_CONTACT_ID + " IS ?";
 		String[] selectionArgs = {Long.toString(id)};
 		
-		SQLiteDatabase db = this.getWritableDatabase();
+		// Attempt to delete the contact. If successful, result will equal 1.
+		// If not, 0.
 		int result = db.delete(ContactsEntry.TABLE_NAME,
 				selection,
 				selectionArgs
@@ -208,13 +227,19 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 		if (result > 0) {
 			notifyContactsProvider();
 		}
-		return result;
+		
+		// Notifies the caller of success or not.
+		return result > 0;
 	}
 	
 	private void notifyContactsProvider() {
 		context.getContentResolver().notifyChange(ContactsProvider.URI_CONTACTS, null, false);
 	}
 	
+	/**
+	 * Deletes all entries in the database.
+	 * @return - If it was successful, returns true. False otherwise.
+	 */
 	public synchronized boolean flushDatabase() {
 		
 		SQLiteDatabase db = this.getWritableDatabase();

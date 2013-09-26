@@ -81,7 +81,7 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 		// The names of the columns that will be read from the database into
 		// the views.
 		String[] columns = new String[] {
-				ContactsEntry.COLUMN_NAME_FIRST_NAME
+				ContactsEntry.COLUMN_NAME_FULL_NAME
 		};
 
 		

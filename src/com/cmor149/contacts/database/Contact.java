@@ -20,6 +20,7 @@ public class Contact {
 	public long id = -1;
 	private String firstName;
 	private String lastName;
+	private String fullName;
 	private String mobilePhone;
 	private String homePhone;
 	private String workPhone;
@@ -45,14 +46,15 @@ public class Contact {
 			String photoUri) {
 		
 		this.id = id;
-		this.firstName = firstName;
+		this.firstName = firstName.trim();
 		this.lastName = lastName;
-		this.mobilePhone = mobilePhone;
-		this.homePhone = homePhone;
-		this.workPhone = workPhone;
-		this.emailAddress = emailAddress;
-		this.homeAddress = homeAddress;
-		this.dateOfBirth = dateOfBirth;
+		this.fullName = this.firstName + " " + this.lastName;
+		this.mobilePhone = mobilePhone.trim();
+		this.homePhone = homePhone.trim();
+		this.workPhone = workPhone.trim();
+		this.emailAddress = emailAddress.trim();
+		this.homeAddress = homeAddress.trim();
+		this.dateOfBirth = dateOfBirth.trim();
 		this.photoUri = photoUri;
 		
 	}
@@ -66,13 +68,14 @@ public class Contact {
 		id 				= cursor.getLong(0);
 		firstName 		= cursor.getString(1);
 		lastName 		= cursor.getString(2);
-		mobilePhone 	= cursor.getString(3);
-		homePhone 		= cursor.getString(4);
-		workPhone 		= cursor.getString(5);
-		emailAddress 	= cursor.getString(6);
-		homeAddress 	= cursor.getString(7);
-		dateOfBirth 	= cursor.getString(8);
-		photoUri 		= cursor.getString(9);
+		fullName		= cursor.getString(3);
+		mobilePhone 	= cursor.getString(4);
+		homePhone 		= cursor.getString(5);
+		workPhone 		= cursor.getString(6);
+		emailAddress 	= cursor.getString(7);
+		homeAddress 	= cursor.getString(8);
+		dateOfBirth 	= cursor.getString(9);
+		photoUri 		= cursor.getString(10);
 	}
 	
 	/**
@@ -84,6 +87,7 @@ public class Contact {
 		
 		contentValues.put(ContactsEntry.COLUMN_NAME_FIRST_NAME, getFirstName());
 		contentValues.put(ContactsEntry.COLUMN_NAME_LAST_NAME, getLastName());
+		contentValues.put(ContactsEntry.COLUMN_NAME_FULL_NAME, getFullName());
 		contentValues.put(ContactsEntry.COLUMN_NAME_MOBILE_PHONE, getMobilePhone());
 		contentValues.put(ContactsEntry.COLUMN_NAME_HOME_PHONE, getHomePhone());
 		contentValues.put(ContactsEntry.COLUMN_NAME_WORK_PHONE, getWorkPhone());
@@ -94,7 +98,7 @@ public class Contact {
 		
 		return contentValues;
 	}
-	
+
 	/**
 	 * Checks whether the Contact has any fields filled in or not.
 	 * 
@@ -124,6 +128,13 @@ public class Contact {
 	 */
 	public String getLastName() {
 		return lastName;
+	}
+	
+	/**
+	 * @return fullName
+	 */
+	public String getFullName() {
+		return fullName;
 	}
 
 	/**

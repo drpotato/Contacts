@@ -16,7 +16,11 @@ This is a guide to use my contact manager application.
 
 When you open the app, you are greeted with the list of contacts currently entered in the application.
 
-To add a new contact simply click the ![New Contact](http://i.imgur.com/fRBw4hh.png) button.
+To add a new contact simply click the
+
+![New Contact](http://i.imgur.com/fRBw4hh.png)
+
+button.
 
 Once you have a few contacts, you might want to sort them.
 To do so, tap the
@@ -30,6 +34,8 @@ This will bring up a drop down selection menu with different sort options.
 ### Creating a new contact
 
 At the new contact screen, enter as many details as you wish.
+
+To add a photo, click on the temporary contact image.
 
 When you've finished press the
 
@@ -45,7 +51,7 @@ If you want to cancel creating a new contact, press the
 button.
 
 
-## Viewing a contact
+### Viewing a contact
 
 To view the contact's details, simply tap the contact you wish to wish to view more information about.
 
@@ -62,7 +68,7 @@ To delete a contact, tap the
 button.
 
 
-# Editing a contact
+### Editing a contact
 
 Editing a contact is just like creating a new one.
 

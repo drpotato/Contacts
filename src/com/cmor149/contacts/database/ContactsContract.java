@@ -23,6 +23,7 @@ public final class ContactsContract {
 		public static final String COLUMN_NAME_CONTACT_ID = "_id";
 		public static final String COLUMN_NAME_FIRST_NAME = "first_name";
 		public static final String COLUMN_NAME_LAST_NAME = "last_name";
+		public static final String COLUMN_NAME_FULL_NAME = "full_name";
 		public static final String COLUMN_NAME_MOBILE_PHONE = "mobile_phone";
 		public static final String COLUMN_NAME_HOME_PHONE = "home_phone";
 		public static final String COLUMN_NAME_WORK_PHONE = "work_phone";
@@ -36,6 +37,7 @@ public final class ContactsContract {
 		public static final String[] COLUMNS = {COLUMN_NAME_CONTACT_ID,
 			COLUMN_NAME_FIRST_NAME,
 			COLUMN_NAME_LAST_NAME,
+			COLUMN_NAME_FULL_NAME,
 			COLUMN_NAME_MOBILE_PHONE,
 			COLUMN_NAME_HOME_PHONE,
 			COLUMN_NAME_WORK_PHONE,
@@ -57,6 +59,7 @@ public final class ContactsContract {
 			ContactsEntry.COLUMN_NAME_CONTACT_ID + INTEGER_TYPE + PRIMARY_KEY_AUTOINCREMENT + COMMA +
 			ContactsEntry.COLUMN_NAME_FIRST_NAME + TEXT_TYPE + COMMA +
 			ContactsEntry.COLUMN_NAME_LAST_NAME + TEXT_TYPE + COMMA +
+			ContactsEntry.COLUMN_NAME_FULL_NAME + TEXT_TYPE + COMMA +
 			ContactsEntry.COLUMN_NAME_MOBILE_PHONE + TEXT_TYPE + COMMA +
 			ContactsEntry.COLUMN_NAME_HOME_PHONE + TEXT_TYPE + COMMA +
 			ContactsEntry.COLUMN_NAME_WORK_PHONE + TEXT_TYPE + COMMA +

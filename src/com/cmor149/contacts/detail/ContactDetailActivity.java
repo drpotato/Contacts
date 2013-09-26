@@ -80,49 +80,67 @@ public class ContactDetailActivity extends FragmentActivity {
 		return true;
 	}
 	
+	/**
+	 * This is called when the user clicks an action bar menu button. Different
+	 * behavior is expected when different buttons are clicked.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+			// activity, the Up button is shown.
+			
+			// If the user clicks the 'back' section of the action bar, send them
+			// to the previous screen.			
 			NavUtils.navigateUpTo(this, new Intent(this,
 					ContactListActivity.class));
 			return true;
 		case R.id.edit:
+			// If the user clicked the edit contact button, call the method to 
+			// edit the contact.
 			editContact();
 			break;
 		case R.id.delete:
+			// If the user clicked the delete contact button, call the method to 
+			// delete the contact.
 			deleteContact();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * This is called when the user clicks on the edit contact button, starts a
+	 * new activity to edit the contact.
+	 */
 	private void editContact() {
 		Intent intent = new Intent(this, EditContactActivity.class);
 		intent.putExtra(CONTACT_ID_MESSAGE, id);
 		startActivity(intent);
 	}
 	
+	/**
+	 * Is called when the user clicks on the delete contact button.
+	 */
 	private void deleteContact() {
 		
 		final ContactsDbHelper dbHelper = ContactsDbHelper.getInstance(this);
 		
 		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+			
+			/**
+			 * If the user responds positively, delete the contact. Otherwise do nothing.
+			 */
 		    @Override
 		    public void onClick(DialogInterface dialog, int which) {
 		        switch (which){
-		        case DialogInterface.BUTTON_NEGATIVE:
+		        case DialogInterface.BUTTON_POSITIVE:
 		            dbHelper.deleteContact(id);
 		            onBackPressed();
 
-		        case DialogInterface.BUTTON_POSITIVE:
+		        case DialogInterface.BUTTON_NEGATIVE:
 		            // User cancelled deletion, abort.
 		            break;
 		        }
@@ -131,10 +149,8 @@ public class ContactDetailActivity extends FragmentActivity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
-		// Note the Negative button is labeled Yes and the positive the opposite.
-		// This is so the abort option is closest to the users thumb when the
-		// user selects delete.
-		builder.setMessage("Are you sure?").setNegativeButton("Yes", dialogClickListener)
-			.setPositiveButton("No", dialogClickListener).show();
+		// Creates a pop up to ask if they really want to delete the contact. Then shows it.
+		builder.setMessage("Are you sure?").setNegativeButton("No", dialogClickListener)
+			.setPositiveButton("Yes", dialogClickListener).show();
 	}
 }

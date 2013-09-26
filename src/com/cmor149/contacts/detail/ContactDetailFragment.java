@@ -51,15 +51,15 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Getting contact where id = " + getArguments().getLong(ARG_ITEM_ID));
 			
-			// Load the dummy content specified by the fragment
-			// arguments. In a real-world scenario, use a Loader
-			// to load content from a content provider.
+			// Load the contact from the database, passing on the id number provided by the activity.
 			contact = ContactsDbHelper.getInstance(getActivity()).getContact(getArguments().getLong(ARG_ITEM_ID));
 		} else {
 			Log.d(TAG, "ContactDetailFragment: WARNING!!! Missing argument - " + ARG_ITEM_ID);
 		}
 		
-		getActivity().setTitle(contact.getFirstName() + " " + contact.getLastName());
+		// Set the action bar title to be the contact's full name. Adds a nice
+		// aesthetic.
+		getActivity().setTitle(contact.getFullName());
 		
 		Log.d(TAG, "ContactDetailFragment: onCreate finished");
 	}
@@ -76,6 +76,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Mobile Phone" + contact.getMobilePhone() );
 			
+			// Only views corresponding to existing data is made visible.
 			if (!contact.getMobilePhone().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_content);
 				textView.setText(contact.getMobilePhone());

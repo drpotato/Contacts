@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.cmor149.contacts.database.ContactsDbHelper;
 import com.cmor149.contacts.detail.ContactDetailActivity;
 import com.cmor149.contacts.detail.ContactDetailFragment;
 

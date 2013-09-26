@@ -62,9 +62,9 @@ public class ContactsProvider extends ContentProvider {
 			String[] selectionArgs, String sortOrder) {
 		Cursor cursor = null;
 		
-		// If the URI is for the entire database, then create a cursor for all
-		// database entries.
 		if (URI_CONTACTS.equals(uri)){
+			// If the URI is for the entire database, then create a cursor for all
+			// database entries.
 			SQLiteOpenHelper dbHelper = ContactsDbHelper.getInstance(getContext());
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			cursor = db.query(ContactsEntry.TABLE_NAME,
@@ -76,6 +76,9 @@ public class ContactsProvider extends ContentProvider {
 					sortOrder);
 			
 		} else if (uri.toString().startsWith(CONTACT_BASE)){
+			// If the URI starts with the base contact URI, a single
+			// contact is being requested. Create a cursor to access this
+			// database entry.
 			long id = Long.parseLong(uri.getLastPathSegment());
 			SQLiteOpenHelper dbHelper = ContactsDbHelper.getInstance(getContext());
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -88,12 +91,14 @@ public class ContactsProvider extends ContentProvider {
 					null,
 					null);
 		} else {
+			// Otherwise, the URI is completely invalid, throw an exception.
 			throw new UnsupportedOperationException("Invalid URI");
 		}
 		
-		// Sets the Contacts Provider to listen for changed of the database.
+		// Sets the Contacts Provider to listen changes to the database.
 		cursor.setNotificationUri(getContext().getContentResolver(), URI_CONTACTS);
 		
+		// Return the cursor that was created.
 		return cursor;
 	}
 
