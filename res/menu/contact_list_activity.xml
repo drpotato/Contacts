@@ -5,10 +5,36 @@
         android:id="@+id/add_new_contact"
         android:title="@string/add_contact_title"
         android:icon="@drawable/social_add_person_dark"
-        android:orderInCategory="1"
         android:showAsAction="ifRoom"
         android:onClick="createNewContact"
         />
+    <item 
+        android:id="@+id/sort_spinner"
+        android:title="@string/sort_order_title"
+        android:icon="@drawable/sort_order"
+        android:showAsAction="ifRoom"
+        >
+		
+        <menu>
+        	<item
+        	    android:id="@+id/sort_first_name"
+        	    android:title="@string/sort_first_name_title"
+				android:onClick="changeSortOrder"
+        	    />
+        	
+        	<item
+        	    android:id="@+id/sort_last_name"
+        	    android:title="@string/sort_last_name_title"
+        	    android:onClick="changeSortOrder"
+        	    />
+        	
+        	<item
+        	    android:id="@+id/sort_phone_number"
+        	    android:title="@string/sort_phone_number_title"
+        	    android:onClick="changeSortOrder"
+        	    />
+        </menu>
+	</item>
     
 
 </menu>

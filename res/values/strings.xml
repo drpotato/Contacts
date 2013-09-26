@@ -17,5 +17,9 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="discard_title">Discard</string>
+    <string name="sort_order_title">Order By</string>
+    <string name="sort_first_name_title">First Name</string>
+    <string name="sort_last_name_title">Last Name</string>
+    <string name="sort_phone_number_title">Phone Number</string>
 
 </resources>

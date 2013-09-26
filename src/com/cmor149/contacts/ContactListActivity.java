@@ -13,6 +13,7 @@ import com.cmor149.contacts.detail.ContactDetailActivity;
 import com.cmor149.contacts.detail.ContactDetailFragment;
 
 /**
+ * 
  * An activity representing a list of Contacts. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity
  * presents a list of items, which when touched, lead to a
@@ -65,8 +66,6 @@ public class ContactListActivity extends FragmentActivity implements
 					.findFragmentById(R.id.contact_list))
 					.setActivateOnItemClick(true);
 		}
-
-		// TODO: If exposing deep links into your app, handle intents here.
 		
 		Log.d(TAG, "ContactListActivity: onCreated finished");
 	}
@@ -126,11 +125,12 @@ public class ContactListActivity extends FragmentActivity implements
 		startActivity(intent);
 	}
 	
-//	@Override
-//	public void onDestroy() {
-//		ContactsDbHelper dbHelper = ContactsDbHelper.getInstance(this);
-//		dbHelper.flushDatabase();
-//		
-//		super.onDestroy();
-//	}
+	/**
+	 * This is called when the user clicks on one of the sort options. It
+	 * simply passes the message onto the fragment to deal with.
+	 * @param item the menu item that was clicked on.
+	 */
+	public void changeSortOrder(MenuItem item) {
+		((ContactListFragment) getSupportFragmentManager().findFragmentById(R.id.contact_list)).changeSortOrder(item);
+	}
 }

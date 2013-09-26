@@ -95,8 +95,14 @@ public class Contact {
 		return contentValues;
 	}
 	
-	public boolean isBlank() {
+	/**
+	 * Checks whether the Contact has any fields filled in or not.
+	 * 
+	 * @return true if the Contact contains only empty fields
+	 */
+	public boolean isEmpty() {
 		
+		// Just a big conditional statement.
 		if (firstName.isEmpty() && lastName.isEmpty() && mobilePhone.isEmpty() &&
 				homePhone.isEmpty() && workPhone.isEmpty() && emailAddress.isEmpty() &&
 				homeAddress.isEmpty() && dateOfBirth.isEmpty() && photoUri.isEmpty()) {
@@ -107,61 +113,63 @@ public class Contact {
 	}
 
 	/**
-	 * @return the first_name
+	 * @return firstName
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
-	 * @return the last_name
+	 * @return lastName
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
-	 * @return the mobile_phone
+	 * @return mobilePhone
 	 */
 	public String getMobilePhone() {
 		return mobilePhone;
 	}
 
 	/**
-	 * @return the home_phone
+	 * @return homePhone
 	 */
 	public String getHomePhone() {
 		return homePhone;
 	}
 
 	/**
-	 * @return the work_phone
+	 * @return workPhone
 	 */
 	public String getWorkPhone() {
 		return workPhone;
 	}
 
 	/**
-	 * @return the email_address
+	 * @return emailAddress
 	 */
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
 	/**
-	 * @return the home_address
+	 * @return homeAddress
 	 */
 	public String getHomeAddress() {
 		return homeAddress;
 	}
 
 	/**
-	 * @return the date_of_birth
+	 * @return dateOfBirth
 	 */
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	
+	/**
+	 * @return photoUri
+	 */
 	public String getPhotoUri() {
 		return photoUri;
 	}

@@ -54,12 +54,16 @@ public class ContactsProvider extends ContentProvider {
 	
 	/**
 	 * TODO Potentially change implementation!
+	 * This allows the database to be queried asynchronously, not essential
+	 * for a project this small but is good practice.
 	 */
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 		Cursor cursor = null;
 		
+		// If the URI is for the entire database, then create a cursor for all
+		// database entries.
 		if (URI_CONTACTS.equals(uri)){
 			SQLiteOpenHelper dbHelper = ContactsDbHelper.getInstance(getContext());
 			SQLiteDatabase db = dbHelper.getReadableDatabase();

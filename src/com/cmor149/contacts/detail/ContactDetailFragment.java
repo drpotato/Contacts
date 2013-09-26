@@ -76,7 +76,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Mobile Phone" + contact.getMobilePhone() );
 			
-			if (contact.getMobilePhone() != "") {
+			if (!contact.getMobilePhone().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.mobile_phone_content);
 				textView.setText(contact.getMobilePhone());
 				textView.setVisibility(View.VISIBLE);
@@ -86,7 +86,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Home Phone" + contact.getHomePhone() );
 			
-			if (contact.getHomePhone() != "") {
+			if (!contact.getHomePhone().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.home_phone_content);
 				textView.setText(contact.getHomePhone());
 				textView.setVisibility(View.VISIBLE);
@@ -96,7 +96,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Work Phone" + contact.getWorkPhone() );
 			
-			if (contact.getWorkPhone() != "") {
+			if (!contact.getWorkPhone().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.work_phone_content);
 				textView.setText(contact.getWorkPhone());
 				textView.setVisibility(View.VISIBLE);
@@ -106,7 +106,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Email Address" + contact.getEmailAddress() );
 			
-			if (contact.getEmailAddress() != "") {
+			if (!contact.getEmailAddress().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.email_address_content);
 				textView.setText(contact.getEmailAddress());
 				textView.setVisibility(View.VISIBLE);
@@ -116,7 +116,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Home Address" + contact.getHomeAddress() );
 			
-			if (contact.getHomeAddress() != "") {
+			if (!contact.getHomeAddress().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.home_address_content);
 				textView.setText(contact.getHomeAddress());
 				textView.setVisibility(View.VISIBLE);
@@ -126,7 +126,7 @@ public class ContactDetailFragment extends Fragment {
 			
 			Log.d(TAG, "ContactDetailFragment: Date of Birth" + contact.getDateOfBirth() );
 			
-			if (contact.getDateOfBirth() != "") {
+			if (!contact.getDateOfBirth().isEmpty()) {
 				textView = (TextView)rootView.findViewById(R.id.date_of_birth_content);
 				textView.setText(contact.getDateOfBirth());
 				textView.setVisibility(View.VISIBLE);
