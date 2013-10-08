@@ -118,7 +118,6 @@ public class EditContactActivity extends Activity {
 
 		
 		// TODO: Does not work!
-		/*
 			photoView.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -126,7 +125,6 @@ public class EditContactActivity extends Activity {
 					pickImage();
 				}
 			});
-		 */
 
 		
 		// Set a listener for the date of birth field.
@@ -141,7 +139,6 @@ public class EditContactActivity extends Activity {
 		
 		
 		// TODO: Does not work!
-		/*
 		InputStream inputStream;
 		try {
 			inputStream = getContentResolver().openInputStream(
@@ -154,7 +151,6 @@ public class EditContactActivity extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		*/
 	}
 
 	@Override
