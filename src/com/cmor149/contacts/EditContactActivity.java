@@ -116,17 +116,17 @@ public class EditContactActivity extends Activity {
 		photoView = (ImageView)findViewById(R.id.contact_image);
 		dateOfBirth = (TextView)findViewById(R.id.date_of_birth);
 
-		
+
 		// TODO: Does not work!
-			photoView.setOnClickListener(new View.OnClickListener() {
+		photoView.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View view) {
-					pickImage();
-				}
-			});
+			@Override
+			public void onClick(View view) {
+				pickImage();
+			}
+		});
 
-		
+
 		// Set a listener for the date of birth field.
 		dateOfBirth.setOnClickListener(new View.OnClickListener() {
 
@@ -136,8 +136,8 @@ public class EditContactActivity extends Activity {
 
 			}
 		});
-		
-		
+
+
 		// TODO: Does not work!
 		InputStream inputStream;
 		try {
@@ -162,7 +162,7 @@ public class EditContactActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+
 		// TODO: This needs to be redone, ignore this please...
 		switch (item.getItemId()) {
 		case android.R.id.home:
@@ -174,7 +174,7 @@ public class EditContactActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 
 	}
-	
+
 	// Saves the contact when the back button is pressed.
 	@Override
 	public void onBackPressed() {
@@ -183,21 +183,21 @@ public class EditContactActivity extends Activity {
 
 		super.onBackPressed();
 	}
-	
+
 	/**
 	 * Saves the contact using the database helper. Will not save the contact
 	 * if all fields are blank.
 	 */
 	private void saveContact() {
-		
+
 		// The calendar will be used for getting the current time in
 		// milliseconds
 		Calendar calendar = Calendar.getInstance();
-		
+
 		// Creates a new file according to the current time.
 		String fileName = Long.toString(calendar.getTimeInMillis()) + ".png";
 		File file = new File(this.getFilesDir(), fileName);
-		
+
 		// Tries to create a new file.
 		try {
 			file.createNewFile();
@@ -205,11 +205,11 @@ public class EditContactActivity extends Activity {
 			e.printStackTrace();
 			return;
 		}
-		
+
 		// Gets the URI for the file.
 		URI photoUri = file.toURI();
-		
-		
+
+
 		// Tries to write the image to the private section of the hard drive.
 		try { 
 			FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -218,8 +218,8 @@ public class EditContactActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		// Creates a new contact with the information from the views.
 		contact = new Contact(
 				id,
@@ -233,7 +233,7 @@ public class EditContactActivity extends Activity {
 				((TextView) findViewById(R.id.date_of_birth)).getText().toString(),
 				photoUri.toString()
 				);
-		
+
 		// If the contact isn't blank, saves the image.
 		if (!contact.isEmpty()) {
 			dbHelper.updateContact(contact);
@@ -254,7 +254,7 @@ public class EditContactActivity extends Activity {
 			dateOfBirth.setText(Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year));
 		}
 	};
-	
+
 	/**
 	 * Is called when a call to create a dialog is made.
 	 */
@@ -277,7 +277,7 @@ public class EditContactActivity extends Activity {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Makes a call to the system to get an image.
 	 */
@@ -288,7 +288,7 @@ public class EditContactActivity extends Activity {
 		intent.addCategory(Intent.CATEGORY_OPENABLE);
 		startActivityForResult(intent, PHOTO_SELECTION_REQUEST_ID);
 	}
-	
+
 	/**
 	 * This is called when the system returns the image that was requested.
 	 */
