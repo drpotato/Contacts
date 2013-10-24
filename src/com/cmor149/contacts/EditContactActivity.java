@@ -1,6 +1,7 @@
 package com.cmor149.contacts;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class EditContactActivity extends Activity {
 
 	private static final int DATE_PICKER_DIALOG_ID = 1;
 	private static final int PHOTO_SELECTION_REQUEST_ID = 1;
+	private static final int PHOTO_CROP_REQUEST_ID = 2;
 
 	private ContactsDbHelper dbHelper;
 	private long id = -1;
@@ -46,6 +48,7 @@ public class EditContactActivity extends Activity {
 	private int month = 0;
 	private int day = 0;
 	private Bitmap image;
+	private String fileName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -289,29 +292,88 @@ public class EditContactActivity extends Activity {
 		startActivityForResult(intent, PHOTO_SELECTION_REQUEST_ID);
 	}
 
+	private void cropPhoto(Uri uri) {
+		Intent intent = new Intent("com.android.camera.action.CROP");   
+		intent.setData(uri);  
+		intent.putExtra("crop", "true");  
+		intent.putExtra("aspectX", 1);  
+		intent.putExtra("aspectY", 1);  
+		intent.putExtra("outputX", 768);  
+		intent.putExtra("outputY", 768);  
+		intent.putExtra("noFaceDetection", true);  
+		intent.putExtra("return-data", true);                                  
+		startActivityForResult(intent, PHOTO_CROP_REQUEST_ID);
+	}
+
+	private void savePhoto(Intent intent) {
+
+		// The calendar will be used for getting the current time in
+		// milliseconds
+		Calendar calendar = Calendar.getInstance();
+
+		// Creates a new file according to the current time.
+		String fileName = Long.toString(calendar.getTimeInMillis()) + ".png";
+		File file = new File(this.getFilesDir(), fileName);
+
+		// Tries to create a new file.
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		Bundle extras = intent.getExtras(); 
+
+		try {
+			image = extras.getParcelable("data");
+			FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+			image.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+			photoView.setImageBitmap(image);
+			fileOutputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+	
+	private void readImage() {
+		fileName = contact.getPhotoUri();
+		if (fileName.isEmpty()) {
+			return;
+		}
+		
+		File file = new File(this.getFilesDir(), fileName);
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		image = BitmapFactory.decodeStream(fileInputStream);
+		photoView.setImageBitmap(image);
+	}
+
 	/**
 	 * This is called when the system returns the image that was requested.
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == PHOTO_SELECTION_REQUEST_ID && resultCode == Activity.RESULT_OK)
-			try {
-				if (image != null) {
-					image.recycle();
-				}
-				InputStream inputStream = getContentResolver().openInputStream(
-						data.getData());
-				image = BitmapFactory.decodeStream(inputStream);
-				inputStream.close();	
-				photoView.setImageBitmap(image);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+		if (resultCode == Activity.RESULT_OK)
+			switch (requestCode) {
+			case PHOTO_SELECTION_REQUEST_ID:
+				cropPhoto(data.getData());
+				break;
+			case PHOTO_CROP_REQUEST_ID:
+				savePhoto(data);
+				break;
 			}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-
-
 
 }
