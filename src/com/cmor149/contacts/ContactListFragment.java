@@ -1,17 +1,25 @@
 package com.cmor149.contacts;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -81,13 +89,15 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 		// The names of the columns that will be read from the database into
 		// the views.
 		String[] columns = new String[] {
-				ContactsEntry.COLUMN_NAME_FULL_NAME
+				ContactsEntry.COLUMN_NAME_FULL_NAME,
+				ContactsEntry.COLUMN_NAME_PHOTO_URI
 		};
 
 		
 		// The IDs of the views that the data will be loaded into.
 		int[] viewIDs = new int [] {
-				R.id.contact_list_name
+				R.id.contact_list_name,
+				R.id.contact_list_image
 		};
 
 		Log.d(TAG, "ContactListFragment: Creating a cursor/list adapter");
@@ -95,7 +105,7 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 		
 		// Creates a cursor adapter to be used to load the data from the
 		// database		
-		SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+		ContactSimpleCursorAdapter cursorAdapter = new ContactSimpleCursorAdapter(
 				getActivity(),
 				R.layout.contact_list_item,
 				null,
@@ -103,6 +113,9 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 				viewIDs,
 				0
 				);
+		
+		cursorAdapter.setContext(getActivity());
+		
 
 		Log.d(TAG, "ContactListFragment: Setting the adapter");
 
