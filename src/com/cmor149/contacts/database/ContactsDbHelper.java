@@ -135,7 +135,6 @@ public class ContactsDbHelper extends SQLiteOpenHelper {
 			return true;
 		}
 		
-		// The 
 		return false;
 	}
 	

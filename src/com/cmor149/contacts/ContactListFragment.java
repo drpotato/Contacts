@@ -1,6 +1,8 @@
 package com.cmor149.contacts;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -212,7 +214,13 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 	
 	@Override 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
+	    // Associate searchable configuration with the SearchView
+	    SearchManager searchManager =
+	           (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+	    SearchView searchView =
+	            (SearchView) menu.findItem(R.id.search).getActionView();
+	    searchView.setSearchableInfo(
+	            searchManager.getSearchableInfo(getActivity().getComponentName()));
 	}
 
 	// Implemented methods for the loader manager interface:
