@@ -21,5 +21,7 @@
     <string name="sort_first_name_title">First Name</string>
     <string name="sort_last_name_title">Last Name</string>
     <string name="sort_phone_number_title">Phone Number</string>
+    <string name="search_title">Search Contacts</string>
+    <string name="search_hint">Search Contacts</string>
 
 </resources>

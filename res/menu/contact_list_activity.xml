@@ -34,6 +34,11 @@
         	    android:onClick="changeSortOrder"
         	    />
         </menu>
+            <item android:id="@+id/search"
+          android:title="@string/search_title"
+          android:icon="@drawable/search"
+          android:showAsAction="collapseActionView|ifRoom"
+          android:actionViewClass="android.widget.SearchView" />
 	</item>
     
 
