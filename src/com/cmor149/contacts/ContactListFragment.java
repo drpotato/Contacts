@@ -1,26 +1,21 @@
 package com.cmor149.contacts;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import android.app.Activity;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
@@ -213,6 +208,11 @@ public class ContactListFragment extends ListFragment implements LoaderManager.L
 		}
 
 		mActivatedPosition = position;
+	}
+	
+	@Override 
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
 	}
 
 	// Implemented methods for the loader manager interface:

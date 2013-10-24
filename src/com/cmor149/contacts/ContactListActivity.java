@@ -116,18 +116,6 @@ public class ContactListActivity extends FragmentActivity implements
 	}
 	
 	/**
-	 * createNewContact is called when the create new contact button is
-	 * selected in the action bar.
-	 */
-	public void createNewContact(MenuItem item) {
-		// TODO: Implement method.
-		
-		Intent intent = new Intent(this, EditContactActivity.class);
-		intent.putExtra(CONTACT_ID_MESSAGE, NEW_CONTACT_ID);
-		startActivity(intent);
-	}
-	
-	/**
 	 * This is called when the user clicks on one of the sort options. It
 	 * simply passes the message onto the fragment to deal with.
 	 * @param item the menu item that was clicked on.
