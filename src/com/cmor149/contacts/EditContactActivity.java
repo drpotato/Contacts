@@ -141,19 +141,7 @@ public class EditContactActivity extends Activity {
 		});
 
 
-		// TODO: Does not work!
-		InputStream inputStream;
-		try {
-			inputStream = getContentResolver().openInputStream(
-					new Uri.Builder().path(contact.getPhotoUri()).build());
-			image = BitmapFactory.decodeStream(inputStream);
-			inputStream.close();	
-			photoView.setImageBitmap(image);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		readImage();
 	}
 
 	@Override
@@ -209,9 +197,6 @@ public class EditContactActivity extends Activity {
 			return;
 		}
 
-		// Gets the URI for the file.
-		URI photoUri = file.toURI();
-
 
 		// Tries to write the image to the private section of the hard drive.
 		try { 
@@ -234,7 +219,7 @@ public class EditContactActivity extends Activity {
 				((EditText) findViewById(R.id.email_address)).getText().toString(),
 				((EditText) findViewById(R.id.home_address)).getText().toString(),
 				((TextView) findViewById(R.id.date_of_birth)).getText().toString(),
-				photoUri.toString()
+				fileName
 				);
 
 		// If the contact isn't blank, saves the image.
@@ -342,7 +327,7 @@ public class EditContactActivity extends Activity {
 	
 	private void readImage() {
 		fileName = contact.getPhotoUri();
-		if (fileName.isEmpty()) {
+		if (fileName == null || fileName.isEmpty()) {
 			return;
 		}
 		
