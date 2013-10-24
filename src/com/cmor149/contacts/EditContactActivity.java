@@ -239,7 +239,7 @@ public class EditContactActivity extends Activity {
 
 		public void onDateSet(DatePicker view, int year,
 				int month, int day) {
-			dateOfBirth.setText(Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year));
+			dateOfBirth.setText(Integer.toString(day) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(year));
 		}
 	};
 
