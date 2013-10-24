@@ -119,8 +119,7 @@ public class EditContactActivity extends Activity {
 		photoView = (ImageView)findViewById(R.id.contact_image);
 		dateOfBirth = (TextView)findViewById(R.id.date_of_birth);
 
-
-		// TODO: Does not work!
+		// Set the image to open the gallery.
 		photoView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -154,10 +153,10 @@ public class EditContactActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		// TODO: This needs to be redone, ignore this please...
+		// Not pretty, but it works.
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			onBackPressed();
+			saveContact();
 		case R.id.discard:
 			finish();
 		}
@@ -276,7 +275,10 @@ public class EditContactActivity extends Activity {
 		intent.addCategory(Intent.CATEGORY_OPENABLE);
 		startActivityForResult(intent, PHOTO_SELECTION_REQUEST_ID);
 	}
-
+	/**
+	 * Takes an image from the gallery and requests 
+	 * @param uri - The uri of the image from the gallery.
+	 */
 	private void cropPhoto(Uri uri) {
 		Intent intent = new Intent("com.android.camera.action.CROP");   
 		intent.setData(uri);  
@@ -289,7 +291,11 @@ public class EditContactActivity extends Activity {
 		intent.putExtra("return-data", true);                                  
 		startActivityForResult(intent, PHOTO_CROP_REQUEST_ID);
 	}
-
+	
+	/**
+	 * Saves the photo to the internal storage.
+	 * @param intent
+	 */
 	private void savePhoto(Intent intent) {
 
 		// The calendar will be used for getting the current time in
@@ -307,15 +313,19 @@ public class EditContactActivity extends Activity {
 			e.printStackTrace();
 			return;
 		}
-
+		
+		// Get the extra stuff that was put in the intent to crop the image.
 		Bundle extras = intent.getExtras(); 
 
 		try {
+			// Retrieve the image from the extra data and write it to a file.
 			image = extras.getParcelable("data");
 			FileOutputStream fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
 			image.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
-			photoView.setImageBitmap(image);
 			fileOutputStream.close();
+			
+			// Set the image of the view.
+			photoView.setImageBitmap(image);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -324,22 +334,28 @@ public class EditContactActivity extends Activity {
 
 
 	}
-	
+	/**
+	 * Read the image from file into the image view.
+	 */
 	private void readImage() {
+		
+		// Gets the file name from the contact and checks that its valid.
 		fileName = contact.getPhotoUri();
 		if (fileName == null || fileName.isEmpty()) {
 			return;
 		}
 		
+		// Opens the file and attaches an input stream to it.
 		File file = new File(this.getFilesDir(), fileName);
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = new FileInputStream(file);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
+		
+		// Read the file in through the stream into a bitmap and set the image.
 		image = BitmapFactory.decodeStream(fileInputStream);
 		photoView.setImageBitmap(image);
 	}
@@ -352,9 +368,11 @@ public class EditContactActivity extends Activity {
 		if (resultCode == Activity.RESULT_OK)
 			switch (requestCode) {
 			case PHOTO_SELECTION_REQUEST_ID:
+				// Crop the image returned from the gallery.
 				cropPhoto(data.getData());
 				break;
 			case PHOTO_CROP_REQUEST_ID:
+				// Save the photo that was just cropped.
 				savePhoto(data);
 				break;
 			}

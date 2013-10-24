@@ -107,9 +107,15 @@ public class Contact {
 	public boolean isEmpty() {
 		
 		// Just a big conditional statement.
-		if (firstName.isEmpty() && lastName.isEmpty() && mobilePhone.isEmpty() &&
-				homePhone.isEmpty() && workPhone.isEmpty() && emailAddress.isEmpty() &&
-				homeAddress.isEmpty() && dateOfBirth.isEmpty() && photoUri.isEmpty()) {
+		if (firstName.isEmpty() || firstName == null &&
+				lastName.isEmpty() ||lastName == null &&
+				mobilePhone.isEmpty() || mobilePhone == null &&
+				homePhone.isEmpty() || homePhone == null &&
+				workPhone.isEmpty() || workPhone == null &&
+				emailAddress.isEmpty() || emailAddress == null &&
+				homeAddress.isEmpty() || homeAddress == null &&
+				dateOfBirth.isEmpty() || dateOfBirth == null &&
+				photoUri.isEmpty() || photoUri == null) {
 			return true;
 		}
 		

@@ -141,7 +141,7 @@ public class ContactDetailFragment extends Fragment {
 				textView = (TextView)rootView.findViewById(R.id.date_of_birth_title);
 				textView.setVisibility(View.VISIBLE);
 			}
-			
+			// Pass the rootView to the image reader.
 			readImage(rootView);
 			
 		}
@@ -149,13 +149,20 @@ public class ContactDetailFragment extends Fragment {
 	}
 	
 	
-	
+	/**
+	 * Reads the image file associated with the contacts fileName into the
+	 * contact_image ImageView of the provided view.
+	 * @param view
+	 */
 	private void readImage(View view) {
+		
+		//Get the fileName from the contact. If its blank or null, abort.
 		String fileName = contact.getPhotoUri();
 		if (fileName == null || fileName.isEmpty()) {
 			return;
 		}
 		
+		// Open the file and create an input stream to it.
 		File file = new File(this.getActivity().getFilesDir(), fileName);
 		FileInputStream fileInputStream = null;
 		try {
@@ -165,6 +172,8 @@ public class ContactDetailFragment extends Fragment {
 			e.printStackTrace();
 			return;
 		}
+		
+		//Read the file in through the stream and set the ImageView bitmap.
 		Bitmap image = BitmapFactory.decodeStream(fileInputStream);
 		((ImageView)view.findViewById(R.id.contact_image)).setImageBitmap(image);
 	}

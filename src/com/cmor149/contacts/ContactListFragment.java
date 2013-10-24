@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.cmor149.contacts.database.ContactsContract.ContactsEntry;
+import com.cmor149.contacts.database.ContactSimpleCursorAdapter;
 import com.cmor149.contacts.database.ContactsProvider;
 import com.cmor149.contacts.detail.ContactDetailFragment;
 
