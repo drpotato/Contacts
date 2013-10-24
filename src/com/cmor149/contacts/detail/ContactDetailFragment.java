@@ -1,11 +1,18 @@
 package com.cmor149.contacts.detail;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cmor149.contacts.ContactListActivity;
@@ -135,8 +142,30 @@ public class ContactDetailFragment extends Fragment {
 				textView.setVisibility(View.VISIBLE);
 			}
 			
+			readImage(rootView);
 			
 		}
 		return rootView;
+	}
+	
+	
+	
+	private void readImage(View view) {
+		String fileName = contact.getPhotoUri();
+		if (fileName == null || fileName.isEmpty()) {
+			return;
+		}
+		
+		File file = new File(this.getActivity().getFilesDir(), fileName);
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		Bitmap image = BitmapFactory.decodeStream(fileInputStream);
+		((ImageView)view.findViewById(R.id.contact_image)).setImageBitmap(image);
 	}
 }
